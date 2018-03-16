@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "SET NODE_ENV=dev&& nodemon index.js",
+    "start": "SET NODE_ENV=production&& nodemon index.js"
   },
   "author": "",
   "license": "ISC",
