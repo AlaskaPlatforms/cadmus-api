@@ -1,5 +1,5 @@
 'use strict'
-module.export = (mongoose, config) => {
+module.exports = (mongoose, config) => {
   const database = mongoose.connection
   mongoose.Promise = Promise
   mongoose.connect(config.database, { promiseLibrary: global.Promise })
