@@ -18,7 +18,9 @@ const Schema = mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+
+  books: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
 })
 
 Schema.pre('save', function (next) {
