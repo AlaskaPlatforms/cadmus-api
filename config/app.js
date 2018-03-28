@@ -15,8 +15,6 @@ const passportConfig = require('./passport')
 const config = require('.')
 const database = require('./database')
 
-console.log(config)
-
 passportConfig(passport)
 database(mongoose, config)
 
