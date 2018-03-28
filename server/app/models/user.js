@@ -20,7 +20,7 @@ const Schema = mongoose.Schema({
     required: true
   },
 
-  books: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
+  books: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }]
 })
 
 Schema.pre('save', function (next) {
