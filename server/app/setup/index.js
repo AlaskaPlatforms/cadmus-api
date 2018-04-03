@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const UserModel = require('./../models/user')
 const BookModel = require('./../models/book')
 const ChapterModel = require('./../models/chapter')
+const GenreModel = require('./../models/genre')
 
 const models = {
   User: mongoose.model('User'),
@@ -27,6 +28,12 @@ const models = {
         loaded.push(' - Chapter')
       } else {
         failed.push(' - Chapter')
+      }
+
+      if (GenreModel) {
+        loaded.push(' - Genre')
+      } else {
+        failed.push(' - Genre')
       }
 
       loaded.forEach(model => {
