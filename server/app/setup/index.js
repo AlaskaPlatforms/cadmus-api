@@ -7,6 +7,9 @@ const GenreModel = require('./../models/genre')
 
 const models = {
   User: mongoose.model('User'),
+  Book: mongoose.model('Book'),
+  Chapter: mongoose.model('Chapter'),
+  Genre: mongoose.model('Genre'),
   status () {
     let loaded = []
     let failed = []
