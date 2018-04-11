@@ -1,14 +1,23 @@
 'use strict'
 const { Chapter } = require('./../setup')
+const { Book } = require('./../setup')
 const api = {}
 
 api.addChapter = async (req, res) => {
-  if (!req.body.index || !req.body.text) {
+  if (!req.body.index || !req.body.text || !req.body.bookId) {
     res.status(400)
   } else {
-    const { index, text } = req.body
+    const { index, text, bookId } = req.body
     try {
-      await new Chapter({ description }).save()
+      const newChapter = new Chapter({ index, text, bookId })
+      await newChapter.save()
+
+      console.log(newChapter._id)
+      // FIX: NOT SAVING newChapter._id TO BOOK chapters ARRAY
+      Book.update({ _id: bookId }, { $push: { chapters: newChapter._id }}, (err) => {
+        if (err) res.status(400)
+      })
+
       res.json({ success: true, message: 'Capítulo criado com sucesso' })
     } catch (error) {
       throw new Error(error)
@@ -18,10 +27,10 @@ api.addChapter = async (req, res) => {
 }
 
 api.getChapter = async (req, res) => {
-  if (!req.body.id) {
+  if (!req.params.id) {
     res.status(400)
   } else {
-    Chapter.findOne({ '_id': req.body.id }, (err, chapter) => {
+    Chapter.findOne({ '_id': req.params.id }, (err, chapter) => {
       if (err) {
         res.status(400)
       } else {
@@ -29,6 +38,14 @@ api.getChapter = async (req, res) => {
       }
     })
   }
+}
+
+// TODO delete by id
+
+api.getAll = async (req, res) => {
+  Chapter.find({}, (err, chapters) => {
+    res.send(chapters)
+  })
 }
 
 module.exports = api
