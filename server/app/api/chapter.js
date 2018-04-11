@@ -11,9 +11,6 @@ api.addChapter = async (req, res) => {
     try {
       const newChapter = new Chapter({ index, text, bookId })
       await newChapter.save()
-
-      console.log(newChapter._id)
-      // FIX: NOT SAVING newChapter._id TO BOOK chapters ARRAY
       Book.update({ _id: bookId }, { $push: { chapters: newChapter._id }}, (err) => {
         if (err) res.status(400)
       })
