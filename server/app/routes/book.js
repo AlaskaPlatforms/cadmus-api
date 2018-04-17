@@ -5,4 +5,7 @@ module.exports = app => {
   app.route('/api/v1/book')
     .get(api.getBooks)
     .post(api.addBook)
+  
+  app.route('/api/v1/book/:id')
+    .get(api.getUserBooks)
 }

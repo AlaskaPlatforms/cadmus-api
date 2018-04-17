@@ -18,10 +18,10 @@ api.addBook = async (req, res) => {
 }
 
 api.getUserBooks = async (req, res) => {
-  if (!req.body.userId) {
+  if (!req.params.id) {
     res.status(400)
   } else {
-    Book.find({ 'userId': req.body.userId }, (err, books) => {
+    Book.find({ 'userId': req.params.id }, (err, books) => {
       if (err) {
         res.status(400)
       } else {
