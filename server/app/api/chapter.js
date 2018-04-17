@@ -37,7 +37,25 @@ api.getChapter = async (req, res) => {
   }
 }
 
-// TODO delete by id
+api.deleteChapter = async (req, res) => {
+  if (!req.params.id) {
+    res.status(400)
+  } else {
+    Chapter.remove({ '_id': req.params.id }, (err) => {
+      if (err) {
+        res.status(400)
+      } else {
+        Book.update({ chapters: req.params.id }, { $pull: { chapters: req.params.id }}, (err) => {
+          if (err) {
+            res.status(400)
+          } else {
+            res.status(200).json({ success: true, message: 'Capítulo deletado com sucesso' })
+          }
+        })
+      }
+    })
+  }
+}
 
 api.getAll = async (req, res) => {
   Chapter.find({}, (err, chapters) => {

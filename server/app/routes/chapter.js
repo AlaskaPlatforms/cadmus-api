@@ -8,4 +8,5 @@ module.exports = app => {
   
   app.route('/api/v1/chapter/:id')
     .get(api.getChapter)
+    .delete(api.deleteChapter)
 }
