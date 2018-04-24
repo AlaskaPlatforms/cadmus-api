@@ -17,4 +17,10 @@ api.signup = async (req, res) => {
   }
 }
 
+api.getUsers = async (req, res) => {
+  User.find({}, (err, users) => {
+    res.send(users)
+  })
+}
+
 module.exports = api
