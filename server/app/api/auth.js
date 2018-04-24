@@ -5,8 +5,8 @@ const { secret } = require('./../../../config')
 const api = {}
 
 api.login = async (req, res) => {
-  const { username, password } = req.body
-  const user = await User.findOne({ username }).exec()
+  const { email, password } = req.body
+  const user = await User.findOne({ email }).exec()
 
   await user.comparePassword(password, (error, matches) => {
     if (matches && !error) {
