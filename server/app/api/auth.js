@@ -12,7 +12,7 @@ api.login = async (req, res) => {
     if (matches && !error) {
       const token = jwt.sign({ user }, secret)
       const { _id, username, email } = user
-      const parsedUser = Object.assign({}, {_id, username, email})
+      const parsedUser = Object.assign({}, { _id, username, email })
       res.json({ success: true, message: 'Token fornecido', token, parsedUser })
     } else {
       res.status(401).json({ success: false, message: 'Falha ao autenticar, usuário não existe' })
