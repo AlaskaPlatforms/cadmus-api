@@ -74,4 +74,12 @@ api.getBooks = async (req, res) => {
   })
 }
 
+api.getBook = async (req, res) => {
+  console.log(req.params)
+  Book.find({ _id: req.params.id }, (err, book) => {
+    console.log(book)
+    res.send(book)
+  })
+}
+
 module.exports = api
