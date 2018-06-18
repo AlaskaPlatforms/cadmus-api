@@ -37,6 +37,17 @@ api.getChapter = async (req, res) => {
   }
 }
 
+api.updateChapter = async (req, res) => {
+  if (!req.params.id) {
+    res.status(400)
+  } else {
+    Chapter.findByIdAndUpdate({ '_id': req.params.id }, { $set: { text: req.body.text } }, function (err, chapter) {
+      if (err) res.status(400)
+      res.send(chapter)
+    });
+  }
+}
+
 api.deleteChapter = async (req, res) => {
   if (!req.params.id) {
     res.status(400)
